@@ -21,10 +21,10 @@ function readToken(c: Context): string | null {
 }
 
 export function requireInternalToken(c: Context): void {
-  const expectedToken = process.env.INTERNAL_TRPC_TOKEN;
+  const expectedToken = process.env.INTERNAL_API_TOKEN;
   if (!expectedToken) {
     throw new HTTPException(500, {
-      message: "INTERNAL_TRPC_TOKEN is not configured",
+      message: "INTERNAL_API_TOKEN is not configured",
     });
   }
 

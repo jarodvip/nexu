@@ -20,7 +20,7 @@ Internal API endpoints used by sidecar:
 ## Required env vars
 
 - `RUNTIME_POOL_ID`
-- `INTERNAL_TRPC_TOKEN` (internal API token)
+- `INTERNAL_API_TOKEN` (internal API token)
 - `OPENCLAW_CONFIG_PATH`
 - `RUNTIME_API_BASE_URL`
 
@@ -46,7 +46,7 @@ pnpm --filter @nexu/api dev
 
 ```bash
 export RUNTIME_POOL_ID=default
-export INTERNAL_TRPC_TOKEN=change-me-internal-token
+export INTERNAL_API_TOKEN=change-me-internal-token
 export RUNTIME_API_BASE_URL=http://localhost:3000
 export OPENCLAW_CONFIG_PATH=/tmp/openclaw/config.json
 export RUNTIME_POD_IP=127.0.0.1
@@ -66,6 +66,6 @@ pnpm --filter @nexu/runtime-sidecar dev
 - Call API internal endpoint and compare version:
 
 ```bash
-curl -H "x-internal-token: $INTERNAL_TRPC_TOKEN" \
+curl -H "x-internal-token: $INTERNAL_API_TOKEN" \
   "http://localhost:3000/api/internal/pools/default/config/latest"
 ```

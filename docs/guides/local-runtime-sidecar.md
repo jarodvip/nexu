@@ -48,7 +48,7 @@ BETTER_AUTH_URL=http://localhost:3000
 ENCRYPTION_KEY=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
 
 GATEWAY_TOKEN=gw-secret-token
-INTERNAL_TRPC_TOKEN=change-me-internal-token
+INTERNAL_API_TOKEN=change-me-internal-token
 
 SLACK_CLIENT_ID=...
 SLACK_CLIENT_SECRET=...
@@ -58,7 +58,7 @@ PORT=3000
 WEB_URL=http://localhost:5173
 ```
 
-> 备注：变量名沿用 `INTERNAL_TRPC_TOKEN`，但当前 sidecar 与 API 走的是 internal HTTP 接口。
+> 备注：当前 sidecar 与 API 走的是 internal HTTP 接口，使用 `INTERNAL_API_TOKEN` 做机器鉴权。
 
 ### 3) 启动 API
 
@@ -122,7 +122,7 @@ node dist/index.js gateway run --bind loopback --port 18789 --force --verbose
 
 ```bash
 export RUNTIME_POOL_ID=pool_local_01
-export INTERNAL_TRPC_TOKEN=change-me-internal-token
+export INTERNAL_API_TOKEN=change-me-internal-token
 export RUNTIME_API_BASE_URL=http://localhost:3000
 export RUNTIME_POD_IP=127.0.0.1
 export OPENCLAW_CONFIG_PATH=/tmp/openclaw/config.json
@@ -151,7 +151,7 @@ pnpm --filter @nexu/runtime-sidecar dev
 ### 1) 验证配置快照接口
 
 ```bash
-curl -s -H "x-internal-token: $INTERNAL_TRPC_TOKEN" \
+curl -s -H "x-internal-token: $INTERNAL_API_TOKEN" \
   "http://localhost:3000/api/internal/pools/pool_local_01/config/latest" | jq .
 ```
 
@@ -189,7 +189,7 @@ ls -l /tmp/openclaw/config.json
 
 ### 1) sidecar 报 401 Unauthorized
 
-- 检查 API 与 sidecar 的 `INTERNAL_TRPC_TOKEN` 是否一致
+- 检查 API 与 sidecar 的 `INTERNAL_API_TOKEN` 是否一致
 - 检查请求头是否带 `x-internal-token`
 
 ### 2) sidecar 轮询失败并退避

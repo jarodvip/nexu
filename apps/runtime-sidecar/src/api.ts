@@ -14,7 +14,7 @@ export async function fetchJson(
     ...init,
     headers: {
       "content-type": "application/json",
-      "x-internal-token": env.INTERNAL_TRPC_TOKEN,
+      "x-internal-token": env.INTERNAL_API_TOKEN,
       ...(init?.headers ?? {}),
     },
     signal: withTimeout(env.RUNTIME_REQUEST_TIMEOUT_MS),

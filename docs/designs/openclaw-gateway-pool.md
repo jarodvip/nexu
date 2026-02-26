@@ -87,7 +87,7 @@ apps/gateway-pool (N 个)
 - `OPENCLAW_CONFIG_PATH`（sidecar 落盘配置路径）
 - `OPENCLAW_STATE_DIR`（运行时状态目录）
 - `RUNTIME_POOL_ID`（该 sidecar 所属 pool 节点标识）
-- `INTERNAL_TRPC_TOKEN`（sidecar 调用 internal HTTP API）
+- `INTERNAL_API_TOKEN`（sidecar 调用 internal HTTP API）
 - `RUNTIME_API_BASE_URL`（默认 `http://localhost:3000`，指向 `apps/api`）
 
 可选调优参数：
