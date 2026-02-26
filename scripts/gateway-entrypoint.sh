@@ -51,4 +51,4 @@ fi
 # Set config path and start gateway
 export OPENCLAW_CONFIG_PATH="$CONFIG_PATH"
 echo "Starting OpenClaw gateway on port 18789..."
-exec openclaw gateway run --bind lan --port 18789 --force
+exec openclaw gateway run --bind lan --port 18789 --allow-unconfigured

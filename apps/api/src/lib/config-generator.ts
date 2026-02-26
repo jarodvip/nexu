@@ -182,6 +182,9 @@ export async function generatePoolConfig(
         token: gatewayToken ?? process.env.GATEWAY_TOKEN ?? "gw-secret-token",
       },
       reload: { mode: "hybrid" },
+      controlUi: {
+        dangerouslyAllowHostHeaderOriginFallback: true,
+      },
     },
     agents: {
       defaults: {

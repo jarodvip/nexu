@@ -57,6 +57,7 @@ services:
       NEXU_API_URL: ${NEXU_API_URL:-http://api:3000}
       POOL_ID: pool_local_01
       GATEWAY_TOKEN: ${GATEWAY_TOKEN:-gw-secret-token}
+      POD_IP: ${POD_IP:-127.0.0.1}
     ports:
       - "18789:18789"
 

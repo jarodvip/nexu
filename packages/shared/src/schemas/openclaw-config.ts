@@ -9,12 +9,18 @@ const gatewayReloadSchema = z.object({
   mode: z.enum(["off", "hot", "hybrid"]),
 });
 
+const controlUiSchema = z.object({
+  allowedOrigins: z.array(z.string()).optional(),
+  dangerouslyAllowHostHeaderOriginFallback: z.boolean().optional(),
+}).optional();
+
 const gatewayConfigSchema = z.object({
   port: z.number().default(18789),
   mode: z.literal("local").default("local"),
   bind: z.enum(["loopback", "lan", "auto"]).default("lan"),
   auth: gatewayAuthSchema,
   reload: gatewayReloadSchema.default({ mode: "hybrid" }),
+  controlUi: controlUiSchema,
 });
 
 const agentModelSchema = z.union([

@@ -144,9 +144,12 @@ LITELLM_API_KEY=sk-your-key
 
 **Important:** `BETTER_AUTH_URL` must be the cloudflared tunnel URL (HTTPS).
 
-### 7a. Start Dev Server
+### 7a. Build and Start Dev Server
+
+首次启动需要先构建 shared 包：
 
 ```bash
+pnpm build          # 构建 shared + api（首次必须，后续 tsx watch 自动处理）
 pnpm dev
 ```
 
