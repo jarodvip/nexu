@@ -13,54 +13,38 @@ import {
   stopManagedOpenclawGateway,
 } from "./openclaw-process.js";
 import { createRuntimeState } from "./state.js";
-import { sleep } from "./utils.js";
+import { runWithRetry } from "./utils.js";
 
 const state = createRuntimeState();
 
 async function registerPoolWithRetry(): Promise<void> {
-  let attempt = 1;
-  let retryDelayMs = 1000;
-
-  while (true) {
-    try {
-      await registerPool();
-      return;
-    } catch (error: unknown) {
+  return runWithRetry(
+    registerPool,
+    ({ attempt, retryDelayMs, error }) => {
       log("pool registration failed; retrying", {
         attempt,
         poolId: env.RUNTIME_POOL_ID,
         retryDelayMs,
         error: error instanceof Error ? error.message : "unknown_error",
       });
-
-      await sleep(retryDelayMs);
-      retryDelayMs = Math.min(retryDelayMs * 2, env.RUNTIME_MAX_BACKOFF_MS);
-      attempt += 1;
-    }
-  }
+    },
+    env.RUNTIME_MAX_BACKOFF_MS,
+  );
 }
 
 async function fetchInitialConfigWithRetry(): Promise<void> {
-  let attempt = 1;
-  let retryDelayMs = 1000;
-
-  while (true) {
-    try {
-      await fetchInitialConfig();
-      return;
-    } catch (error: unknown) {
+  return runWithRetry(
+    fetchInitialConfig,
+    ({ attempt, retryDelayMs, error }) => {
       log("initial config sync failed; retrying", {
         attempt,
         poolId: env.RUNTIME_POOL_ID,
         retryDelayMs,
         error: error instanceof Error ? error.message : "unknown_error",
       });
-
-      await sleep(retryDelayMs);
-      retryDelayMs = Math.min(retryDelayMs * 2, env.RUNTIME_MAX_BACKOFF_MS);
-      attempt += 1;
-    }
-  }
+    },
+    env.RUNTIME_MAX_BACKOFF_MS,
+  );
 }
 
 async function main(): Promise<void> {
