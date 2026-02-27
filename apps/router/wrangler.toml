@@ -10,4 +10,5 @@ service = "nexu-landing-worker"
 binding = "APP"
 service = "nexu-app-worker"
 
-# API_ORIGIN is configured via Cloudflare Dashboard → Worker → Settings → Variables
+[vars]
+API_ORIGIN = "https://api.nexu.io"
