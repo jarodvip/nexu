@@ -118,10 +118,15 @@ export async function generatePoolConfig(
     return `litellm/${rawModelId}`;
   }
 
+  // Workspace path must be under the PVC mount so agent files survive pod restarts.
+  // OPENCLAW_STATE_DIR is set to /data/openclaw in production (the PVC mount point).
+  const stateDir = process.env.OPENCLAW_STATE_DIR ?? "/data/openclaw";
+
   const agentList: AgentConfig[] = activeBots.map((bot, index) => {
     const agent: AgentConfig = {
       id: bot.slug,
       name: bot.name,
+      workspace: `${stateDir}/workspaces/${bot.slug}`,
     };
 
     if (index === 0) {
@@ -334,7 +339,7 @@ export async function generatePoolConfig(
       connectionMode: "websocket",
       dmPolicy: "open",
       groupPolicy: "open",
-      requireMention: false,
+      requireMention: true,
       allowFrom: ["*"],
       accounts: feishuAccounts,
     };
