@@ -491,6 +491,13 @@ const en = {
   "sessions.minutesAgo": "{{count}}m ago",
   "sessions.hoursAgo": "{{count}}h ago",
   "sessions.daysAgo": "{{count}}d ago",
+  "sessions.chat.messages": "{{count}} messages",
+  "sessions.chat.lastActive": "Last active {{time}}",
+  "sessions.chat.empty": "No messages yet",
+  "sessions.chat.emptyDesc": "Messages will appear once a conversation starts.",
+  "sessions.chat.unavailable": "Runtime unavailable",
+  "sessions.chat.unavailableDesc": "Cannot connect to the chat runtime.",
+  "sessions.chat.loading": "Loading messages...",
 
   // ── Integrations Page ──
   "integrations.pageTitle": "Integrations",
